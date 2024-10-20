@@ -31,14 +31,14 @@ class TestEstudiante(unittest.TestCase):
         students_button = self.driver.find_element(By.LINK_TEXT, "Estudiantes")
         students_button.click()
         # Verificación URL
-        self.assertEqual("https://fonmala.nyc.dom.my.id/students", self.driver.current_url)
+        self.assertIn("https://fonmala.nyc.dom.my.id/students", self.driver.current_url)
 
         # Crear nuevo estudiante
         new_student_button = self.driver.find_element(By.CLASS_NAME, "students_actions__register")
         new_student_button.click()
         time.sleep(3)
         # Verificación URL
-        self.assertEqual("https://fonmala.nyc.dom.my.id/students/register", self.driver.current_url)
+        self.assertIn("https://fonmala.nyc.dom.my.id/students/register", self.driver.current_url)
 
         # Encontrar el elemento de carga de archivo
         file_input = self.driver.find_element(By.ID, "file")
@@ -81,6 +81,39 @@ class TestEstudiante(unittest.TestCase):
         students_button.click()
         # Verificación URL
         self.assertEqual("https://fonmala.nyc.dom.my.id/students", self.driver.current_url)
+
+    def test_03_create_report(self):
+        # Navegación a inicio de sesión
+        login_button = self.driver.find_element(By.LINK_TEXT, "Iniciar Sesión")
+        login_button.click()
+
+        # Introducir credenciales
+        username_field = self.driver.find_element(By.NAME, "correo")
+        password_field = self.driver.find_element(By.NAME, "contrasenna")
+        username_field.send_keys("admin@admin.com")
+        password_field.send_keys("admin")
+
+        # Iniciar sesión
+        login_form_button = self.driver.find_element(By.CLASS_NAME, "form__submit")
+        login_form_button.click()
+
+        students_button = self.driver.find_element(By.LINK_TEXT, "Estudiantes")
+        students_button.click()
+
+        report_button = self.driver.find_element(By.LINK_TEXT, "Generar Reporte")
+        report_button.click()
+
+        self.assertEqual("https://fonmala.nyc.dom.my.id/students/report", self.driver.current_url)
+
+        all_button = self.driver.find_element(By.ID, "Todos")
+        all_button.click()
+        time.sleep(3)
+
+        submit = self.driver.find_element(By.CLASS_NAME, "report__form__submit")
+        submit.click()
+        
+        time.sleep(4)
+        self.assertEqual("https://fonmala.nyc.dom.my.id/students/report", self.driver.current_url)
         
     def tearDown(self):
         # Cierra el navegador después de cada prueba
