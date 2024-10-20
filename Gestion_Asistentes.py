@@ -28,12 +28,12 @@ class TestPlan(unittest.TestCase):
         assistants_button = self.driver.find_element(By.LINK_TEXT, "Equipo Guía")
         assistants_button.click()
         # Verificación URL
-        self.assertIn("https://fonmala.nyc.dom.my.id/guias", self.driver.current_url)
+        self.assertEqual("https://fonmala.nyc.dom.my.id/guias", self.driver.current_url)
         
         assistants_button = self.driver.find_element(By.LINK_TEXT, "Registrar Asistente")
         assistants_button.click()
         # Verificación URL
-        self.assertIn("https://fonmala.nyc.dom.my.id/guias/register-asistente", self.driver.current_url)
+        self.assertEqual("https://fonmala.nyc.dom.my.id/guias/register-asistente", self.driver.current_url)
         
         #Crear nuevo asistente
         #Completar formulario de asistente
@@ -51,7 +51,7 @@ class TestPlan(unittest.TestCase):
         submit_button.click()
 
         # Verificación de la creación del asistente
-        self.assertIn("https://fonmala.nyc.dom.my.id/guias", self.driver.current_url)
+        self.assertEqual("https://fonmala.nyc.dom.my.id/guias", self.driver.current_url)
 
 
     def tearDown(self):

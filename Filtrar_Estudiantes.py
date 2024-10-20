@@ -32,7 +32,7 @@ class TestActividades(unittest.TestCase):
         students_button = self.driver.find_element(By.LINK_TEXT, "Estudiantes")
         students_button.click()
         # Verificación URL
-        self.assertIn("https://fonmala.nyc.dom.my.id/students", self.driver.current_url)
+        self.assertEqual("https://fonmala.nyc.dom.my.id/students", self.driver.current_url)
 
         # Filtrar estudiante por Apellido
         search_button = self.driver.find_element(By.ID, "apellidos")
@@ -66,7 +66,7 @@ class TestActividades(unittest.TestCase):
         students_button = self.driver.find_element(By.LINK_TEXT, "Estudiantes")
         students_button.click()
         # Verificación URL
-        self.assertIn("https://fonmala.nyc.dom.my.id/students", self.driver.current_url)
+        self.assertEqual("https://fonmala.nyc.dom.my.id/students", self.driver.current_url)
 
         # Filtrar estudiante por Carnet
         search_button = self.driver.find_element(By.ID, "carnet")

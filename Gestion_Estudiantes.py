@@ -31,14 +31,14 @@ class TestActividades(unittest.TestCase):
         students_button = self.driver.find_element(By.LINK_TEXT, "Estudiantes")
         students_button.click()
         # Verificación URL
-        self.assertIn("https://fonmala.nyc.dom.my.id/students", self.driver.current_url)
+        self.assertEqual("https://fonmala.nyc.dom.my.id/students", self.driver.current_url)
 
         # Crear nuevo estudiante
         new_student_button = self.driver.find_element(By.CLASS_NAME, "students_actions__register")
         new_student_button.click()
         time.sleep(3)
         # Verificación URL
-        self.assertIn("https://fonmala.nyc.dom.my.id/students/register", self.driver.current_url)
+        self.assertEqual("https://fonmala.nyc.dom.my.id/students/register", self.driver.current_url)
 
         # Encontrar el elemento de carga de archivo
         file_input = self.driver.find_element(By.ID, "file")
@@ -59,7 +59,7 @@ class TestActividades(unittest.TestCase):
         time.sleep(3)
 
         # Verificación de la creación del estudiante
-        self.assertIn("https://fonmala.nyc.dom.my.id/students/register", self.driver.current_url)
+        self.assertEqual("https://fonmala.nyc.dom.my.id/students/register", self.driver.current_url)
 
     def test_02_view_student(self):
         # Navegación a inicio de sesión
@@ -80,7 +80,7 @@ class TestActividades(unittest.TestCase):
         students_button = self.driver.find_element(By.LINK_TEXT, "Estudiantes")
         students_button.click()
         # Verificación URL
-        self.assertIn("https://fonmala.nyc.dom.my.id/students", self.driver.current_url)
+        self.assertEqual("https://fonmala.nyc.dom.my.id/students", self.driver.current_url)
         
     def tearDown(self):
         # Cierra el navegador después de cada prueba
