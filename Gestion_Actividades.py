@@ -13,6 +13,7 @@ class TestActividades(unittest.TestCase):
         self.driver.get("https://fonmala.nyc.dom.my.id/")
 
     def test_01__create_activity(self):
+        start = time.time()
         # Navegacion a inicion de sesion
         login_button = self.driver.find_element(By.LINK_TEXT, "Iniciar Sesión")
         login_button.click()
@@ -74,8 +75,11 @@ class TestActividades(unittest.TestCase):
         register_button.click()
 
         self.assertIn("https://fonmala.nyc.dom.my.id/plan", self.driver.current_url)
+        end = time.time()
+        print("Tiempo de ejecucion - create_activity: ", end - start)
 
     def test_02__edit_activity(self):
+        start = time.time()
         # Navegacion a inicion de sesion
         login_button = self.driver.find_element(By.LINK_TEXT, "Iniciar Sesión")
         login_button.click()
@@ -117,8 +121,11 @@ class TestActividades(unittest.TestCase):
         register_button.click()
 
         self.assertIn("https://fonmala.nyc.dom.my.id/plans/plan/activity", self.driver.current_url)
+        end = time.time()
+        print("Tiempo de ejecucion - edit_activity: ", end - start)
 
     def test_03_cancel_activity(self):
+        start = time.time()
         # Navegacion a inicion de sesion
         login_button = self.driver.find_element(By.LINK_TEXT, "Iniciar Sesión")
         login_button.click()
@@ -164,7 +171,8 @@ class TestActividades(unittest.TestCase):
         register_button.click()
 
         self.assertIn("https://fonmala.nyc.dom.my.id/plans/plan/activity", self.driver.current_url)
-
+        end = time.time()
+        print("Tiempo de ejecucion - cancel_activity: ", end - start)
 
     def tearDown(self):
         # Cierra el navegador después de cada prueba
