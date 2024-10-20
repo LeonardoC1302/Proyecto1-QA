@@ -3,8 +3,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 import unittest
-import time
-import os
+
 
 class TestPlan(unittest.TestCase):
     def setUp(self):
