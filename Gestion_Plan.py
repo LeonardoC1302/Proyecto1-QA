@@ -11,6 +11,7 @@ class TestPlan(unittest.TestCase):
         self.driver.get("https://fonmala.nyc.dom.my.id/")
 
     def test_01__create_plan(self):
+        start = time.time()
         # Navegacion a inicion de sesion
         login_button = self.driver.find_element(By.LINK_TEXT, "Iniciar Sesión")
         login_button.click()
@@ -45,9 +46,12 @@ class TestPlan(unittest.TestCase):
         submit_button = self.driver.find_element(By.CLASS_NAME, "create-plan__form__submit")
         submit_button.click()
         
-        self.assertIn("https://fonmala.nyc.dom.my.id/plans", self.driver.current_url)
+        self.assertEqual("https://fonmala.nyc.dom.my.id/plans", self.driver.current_url)
+        end = time.time()
+        print("Tiempo de ejecucion - comment_comment: ", end - start)
 
     def test_02__delete_plan(self):
+        start = time.time()
         # Navegacion a inicion de sesion
         login_button = self.driver.find_element(By.LINK_TEXT, "Iniciar Sesión")
         login_button.click()
@@ -70,6 +74,9 @@ class TestPlan(unittest.TestCase):
         #Borrar plan
         delete_button = self.driver.find_element(By.CLASS_NAME, "table__action--delete")
         delete_button.click()
+
+        end = time.time()
+        print("Tiempo de ejecucion - comment_comment: ", end - start)
 
 
     def tearDown(self):
