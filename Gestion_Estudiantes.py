@@ -13,6 +13,8 @@ class TestEstudiante(unittest.TestCase):
         self.driver.get("https://fonmala.nyc.dom.my.id/")
 
     def test_01_register_student(self):
+        check_button = self.driver.find_element(By.XPATH, "//a[contains(text(), '✅ I understand, I trust this site.')]")
+        check_button.click()
         # Navegación a inicio de sesión
         login_button = self.driver.find_element(By.LINK_TEXT, "Iniciar Sesión")
         login_button.click()
@@ -62,6 +64,8 @@ class TestEstudiante(unittest.TestCase):
         self.assertEqual("https://fonmala.nyc.dom.my.id/students/register", self.driver.current_url)
 
     def test_02_view_student(self):
+        check_button = self.driver.find_element(By.XPATH, "//a[contains(text(), '✅ I understand, I trust this site.')]")
+        check_button.click()
         # Navegación a inicio de sesión
         login_button = self.driver.find_element(By.LINK_TEXT, "Iniciar Sesión")
         login_button.click()
@@ -83,6 +87,8 @@ class TestEstudiante(unittest.TestCase):
         self.assertEqual("https://fonmala.nyc.dom.my.id/students", self.driver.current_url)
 
     def test_03_create_report(self):
+        check_button = self.driver.find_element(By.XPATH, "//a[contains(text(), '✅ I understand, I trust this site.')]")
+        check_button.click()
         # Navegación a inicio de sesión
         login_button = self.driver.find_element(By.LINK_TEXT, "Iniciar Sesión")
         login_button.click()
@@ -114,12 +120,10 @@ class TestEstudiante(unittest.TestCase):
         
         time.sleep(4)
         self.assertEqual("https://fonmala.nyc.dom.my.id/students/report", self.driver.current_url)
-        
-    def tearDown(self):
-        # Cierra el navegador después de cada prueba
-        self.driver.quit()
 
     def test_04_filter_student(self):
+        check_button = self.driver.find_element(By.XPATH, "//a[contains(text(), '✅ I understand, I trust this site.')]")
+        check_button.click()
         # Navegación a inicio de sesión
         login_button = self.driver.find_element(By.LINK_TEXT, "Iniciar Sesión")
         login_button.click()
@@ -154,6 +158,8 @@ class TestEstudiante(unittest.TestCase):
         self.assertEqual(last_names, sorted(last_names), "Los estudiantes no están ordenados por apellido correctamente")
     
     def test_05_filter_student(self):
+        check_button = self.driver.find_element(By.XPATH, "//a[contains(text(), '✅ I understand, I trust this site.')]")
+        check_button.click()
         # Navegación a inicio de sesión
         login_button = self.driver.find_element(By.LINK_TEXT, "Iniciar Sesión")
         login_button.click()
@@ -187,6 +193,9 @@ class TestEstudiante(unittest.TestCase):
         # Verificar si la lista está ordenada por apellido
         self.assertEqual(carnets, sorted(carnets), "Los estudiantes no están ordenados por carnet correctamente")
         
+    def tearDown(self):
+        # Cierra el navegador después de cada prueba
+        self.driver.quit()
 
 if __name__ == "__main__":
     unittest.main()

@@ -32,6 +32,8 @@ class GestionProfesores(unittest.TestCase):
         self.driver.get("https://fonmala.nyc.dom.my.id/")
     
     def test_login(self):
+        check_button = self.driver.find_element(By.XPATH, "//a[contains(text(), '✅ I understand, I trust this site.')]")
+        check_button.click()
         # Ingresar a la página de login
         login_button = self.driver.find_element(By.LINK_TEXT, "Iniciar Sesión")
         login_button.click()

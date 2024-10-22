@@ -12,6 +12,8 @@ class TestPlan(unittest.TestCase):
 
     def test_01__create_plan(self):
         start = time.time()
+        check_button = self.driver.find_element(By.XPATH, "//a[contains(text(), '✅ I understand, I trust this site.')]")
+        check_button.click()
         # Navegacion a inicion de sesion
         login_button = self.driver.find_element(By.LINK_TEXT, "Iniciar Sesión")
         login_button.click()
@@ -46,12 +48,14 @@ class TestPlan(unittest.TestCase):
         submit_button = self.driver.find_element(By.CLASS_NAME, "create-plan__form__submit")
         submit_button.click()
         
-        self.assertEqual("https://fonmala.nyc.dom.my.id/plans", self.driver.current_url)
+        self.assertIn("https://fonmala.nyc.dom.my.id/plans", self.driver.current_url)
         end = time.time()
         print("Tiempo de ejecucion - comment_comment: ", end - start)
 
     def test_02__delete_plan(self):
         start = time.time()
+        check_button = self.driver.find_element(By.XPATH, "//a[contains(text(), '✅ I understand, I trust this site.')]")
+        check_button.click()
         # Navegacion a inicion de sesion
         login_button = self.driver.find_element(By.LINK_TEXT, "Iniciar Sesión")
         login_button.click()

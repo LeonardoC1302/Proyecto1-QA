@@ -14,6 +14,8 @@ class TestAsistente(unittest.TestCase):
 
     def test_01_register_assistant(self):
         # Mismo flujo de inicio de sesión
+        check_button = self.driver.find_element(By.XPATH, "//a[contains(text(), '✅ I understand, I trust this site.')]")
+        check_button.click()
         login_button = self.driver.find_element(By.LINK_TEXT, "Iniciar Sesión")
         login_button.click()
 
@@ -56,6 +58,8 @@ class TestAsistente(unittest.TestCase):
         self.assertEqual("https://fonmala.nyc.dom.my.id/guias", self.driver.current_url)
 
     def test_02_asignar_asistente(self):
+        check_button = self.driver.find_element(By.XPATH, "//a[contains(text(), '✅ I understand, I trust this site.')]")
+        check_button.click()
         login_button = self.driver.find_element(By.LINK_TEXT, "Iniciar Sesión")
         login_button.click()
 
