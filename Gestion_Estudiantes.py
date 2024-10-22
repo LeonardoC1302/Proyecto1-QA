@@ -38,13 +38,13 @@ class TestEstudiante(unittest.TestCase):
         # Crear nuevo estudiante
         new_student_button = self.driver.find_element(By.CLASS_NAME, "students_actions__register")
         new_student_button.click()
+        
         time.sleep(3)
         # Verificación URL
         self.assertEqual("https://fonmala.nyc.dom.my.id/students/register", self.driver.current_url)
 
         # Encontrar el elemento de carga de archivo
         file_input = self.driver.find_element(By.ID, "file")
-
 
         # Obtener la ruta del directorio del script actual
         script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -62,8 +62,64 @@ class TestEstudiante(unittest.TestCase):
 
         # Verificación de la creación del estudiante
         self.assertEqual("https://fonmala.nyc.dom.my.id/students/register", self.driver.current_url)
+    
+    def test_02_register_student_missing_carnet(self):
+        # Mismo flujo de inicio de sesión
+        check_button = self.driver.find_element(By.XPATH, "//a[contains(text(), '✅ I understand, I trust this site.')]")
+        check_button.click()
+        login_button = self.driver.find_element(By.LINK_TEXT, "Iniciar Sesión")
+        login_button.click()
 
-    def test_02_view_student(self):
+        # Introducir credenciales
+        username_field = self.driver.find_element(By.NAME, "correo")
+        password_field = self.driver.find_element(By.NAME, "contrasenna")
+        username_field.send_keys("admin@admin.com")
+        password_field.send_keys("admin")
+
+        # Iniciar sesión
+        login_form_button = self.driver.find_element(By.CLASS_NAME, "form__submit")
+        login_form_button.click()
+
+        # Navegación a Gestión de Estudiantes
+        students_button = self.driver.find_element(By.LINK_TEXT, "Estudiantes")
+        students_button.click()
+        # Verificación URL
+        self.assertEqual("https://fonmala.nyc.dom.my.id/students", self.driver.current_url)
+
+        # Crear nuevo estudiante
+        new_student_button = self.driver.find_element(By.CLASS_NAME, "students_actions__register")
+        new_student_button.click()
+
+        time.sleep(3)
+        # Verificación URL
+        self.assertEqual("https://fonmala.nyc.dom.my.id/students/register", self.driver.current_url)
+
+        # Encontrar el elemento de carga de archivo
+        file_input = self.driver.find_element(By.ID, "file")
+
+        # Obtener la ruta del directorio del script actual
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+
+        # Ruta relativa del archivo CSV sin la columna de carnet
+        csv_file_path = os.path.join(script_dir, "ExcelEstudianteError.csv") 
+
+        # Cargar el archivo
+        file_input.send_keys(csv_file_path)
+
+        # Registrar estudiante
+        submit_button = self.driver.find_element(By.CLASS_NAME, "register-form__submit")
+        submit_button.click()
+        time.sleep(3)
+
+        # Verificación del mensaje de error por falta de la columna de carnet
+        error_message = self.driver.find_element(By.XPATH, "//div[contains(@class, 'alert--error') and contains(text(), 'La contraseña es obligatoria')]")
+        self.assertTrue(error_message.is_displayed())
+
+        # Verificar que la URL no cambió debido al error
+        self.assertEqual("https://fonmala.nyc.dom.my.id/students/register", self.driver.current_url)
+    
+
+    def test_03_view_student(self):
         check_button = self.driver.find_element(By.XPATH, "//a[contains(text(), '✅ I understand, I trust this site.')]")
         check_button.click()
         # Navegación a inicio de sesión
@@ -86,7 +142,7 @@ class TestEstudiante(unittest.TestCase):
         # Verificación URL
         self.assertEqual("https://fonmala.nyc.dom.my.id/students", self.driver.current_url)
 
-    def test_03_create_report(self):
+    def test_04_create_report(self):
         check_button = self.driver.find_element(By.XPATH, "//a[contains(text(), '✅ I understand, I trust this site.')]")
         check_button.click()
         # Navegación a inicio de sesión
@@ -121,7 +177,7 @@ class TestEstudiante(unittest.TestCase):
         time.sleep(4)
         self.assertEqual("https://fonmala.nyc.dom.my.id/students/report", self.driver.current_url)
 
-    def test_04_filter_student(self):
+    def test_05_filter_student(self):
         check_button = self.driver.find_element(By.XPATH, "//a[contains(text(), '✅ I understand, I trust this site.')]")
         check_button.click()
         # Navegación a inicio de sesión
@@ -157,7 +213,7 @@ class TestEstudiante(unittest.TestCase):
         # Verificar si la lista está ordenada por apellido
         self.assertEqual(last_names, sorted(last_names), "Los estudiantes no están ordenados por apellido correctamente")
     
-    def test_05_filter_student(self):
+    def test_06_filter_student(self):
         check_button = self.driver.find_element(By.XPATH, "//a[contains(text(), '✅ I understand, I trust this site.')]")
         check_button.click()
         # Navegación a inicio de sesión
