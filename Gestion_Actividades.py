@@ -78,7 +78,7 @@ class TestActividades(unittest.TestCase):
 
         self.assertIn("https://fonmala.nyc.dom.my.id/plan", self.driver.current_url)
         end = time.time()
-        print("Tiempo de ejecucion - comment_comment: ", end - start)
+        print("Tiempo de ejecucion - create_activity: ", end - start)
 
     def test_02__edit_activity(self):
         check_button = self.driver.find_element(By.XPATH, "//a[contains(text(), '✅ I understand, I trust this site.')]")
@@ -126,7 +126,7 @@ class TestActividades(unittest.TestCase):
 
         self.assertIn("https://fonmala.nyc.dom.my.id/plans/plan/activity", self.driver.current_url)
         end = time.time()
-        print("Tiempo de ejecucion - comment_comment: ", end - start)
+        print("Tiempo de ejecucion - edit_activity: ", end - start)
 
     def test_03_cancel_activity(self):
         start = time.time()
@@ -178,7 +178,7 @@ class TestActividades(unittest.TestCase):
 
         self.assertIn("https://fonmala.nyc.dom.my.id/plans/plan/activity", self.driver.current_url)
         end = time.time()
-        print("Tiempo de ejecucion - comment_comment: ", end - start)
+        print("Tiempo de ejecucion - cancel_activity: ", end - start)
 
 
     def tearDown(self):
